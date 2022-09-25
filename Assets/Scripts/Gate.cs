@@ -7,7 +7,7 @@ public class Gate : MonoBehaviour
     private BoxCollider2D box;
     private SpriteRenderer sprite;
 
-    void Start()
+    private void Awake()
     {
         box = GetComponent<BoxCollider2D>();
         sprite = GetComponent<SpriteRenderer>();

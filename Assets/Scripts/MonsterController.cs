@@ -4,51 +4,128 @@ using UnityEngine;
 
 public class MonsterController : MonoBehaviour
 {
-    [SerializeField] float Speed;
-    public float horizontalInput;
-    public Transform Tagret;
-    [SerializeField] LayerMask Wals;
-    bool _isGrounded;
-    Rigidbody2D _rb;
-    Animator _animator;
-    Vector2 movement;
-    BoxCollider2D box;
-    SpriteRenderer _sprite;
-    Vector2 _direction;
+    [Header("Image")]
+    private SpriteRenderer _sprite;
+    private Animator _animator;
+
+    [Header("Physics")]
+    [SerializeField] private float Speed;      // Скорость скелета
+    [SerializeField] private float Fall;       // Скорость падения
+    private Rigidbody2D _rb;
+    private bool isGrounded;  // На земле ли
+    private Vector2 movement; // движение
+    private Dir horizontal;   // Направление
+    enum Dir
+    {
+        Centr = 0,
+        Left = -1,
+        Right = 1
+    }
 
     void Start()
     {
         _rb = GetComponent<Rigidbody2D>();
-        _animator = GetComponent<Animator>();
-        box = GetComponent<BoxCollider2D>();
-        _sprite = GetComponent<SpriteRenderer>();
-        SwipeDetection.SwipeEvent += OnSwipe;
+        horizontal = Dir.Right;
+
+        _animator = transform.GetChild(0).GetComponent<Animator>();
+        _sprite = transform.GetChild(0).GetComponent<SpriteRenderer>();
+
+        Direction.OnChange += ChangeGravity;
     }
 
+    private void ChangeGravity()
+    {
+        Landing();
+    }
+
+    private void OnDisable()
+    {
+        Direction.OnChange -= ChangeGravity;
+    }
+
+    //(int)horizontal * Speed // передвижение
     void FixedUpdate()
     {
         Animator();
-        
-        Quaternion rotation = Quaternion.LookRotation(_direction);
-        //transform.rotation = Quaternion.Lerp(transform.rotation, rotation, 5 * Time.deltaTime);
-
-        if (_isGrounded)
-        {
-            movement = new Vector2(Tagret.position.x - transform.position.x, Tagret.position.y- transform.position.y);
-            _rb.velocity = (movement * horizontalInput * Speed);
-        }
-
-        if (horizontalInput > 0.01f)
-            _sprite.flipX = false;
-            //transform.localScale = new Vector3(1, 1, 1);
-        else if (horizontalInput < -0.01f)
-            _sprite.flipX = true;
-            //transform.localScale = new Vector3(-1, 1, 1);
+        ChangeMoving();
     }
 
-    private void OnSwipe(Vector2 direction)
+    private void ChangeMoving()
     {
-        _direction = direction;
+        if (!isGrounded)
+        {
+            _rb.velocity = Direction.vector2 * Fall;
+
+        }
+        else
+        {
+            if (Direction.vector2.x == 0 && _rb.velocity.x > -0.5f && _rb.velocity.x < 0.5f) // по горизонтали
+            {
+                if (Direction.vector2.y == -1)
+                {
+                    if (horizontal == Dir.Right)
+                    {
+                        _sprite.flipX = true;
+                        _rb.velocity = Vector2.left * Speed;
+                        horizontal = Dir.Left;
+                    }
+                    else
+                    {
+                        _sprite.flipX = false;
+                        _rb.velocity = Vector2.right * Speed;
+                        horizontal = Dir.Right;
+                    }
+                }
+                else
+                {
+                    if (horizontal == Dir.Right)
+                    {
+                        _sprite.flipX = false;
+                        _rb.velocity = Vector2.left * Speed;
+                        horizontal = Dir.Left;
+                    }
+                    else
+                    {
+                        _sprite.flipX = true;
+                        _rb.velocity = Vector2.right * Speed;
+                        horizontal = Dir.Right;
+                    }
+                }
+            }
+            else if (Direction.vector2.y == 0 && _rb.velocity.y > -0.5f && _rb.velocity.y < 0.5f) // по вертикали
+            {
+                if (Direction.vector2.x == -1)
+                {
+                    if (horizontal == Dir.Right)
+                    {
+                        _sprite.flipX = false;
+                        _rb.velocity = Vector2.down * Speed;
+                        horizontal = Dir.Left;
+                    }
+                    else
+                    {
+                        _sprite.flipX = true;
+                        _rb.velocity = Vector2.up * Speed;
+                        horizontal = Dir.Right;
+                    }
+                }
+                else
+                {
+                    if (horizontal == Dir.Right)
+                    {
+                        _sprite.flipX = true;
+                        _rb.velocity = Vector2.down * Speed;
+                        horizontal = Dir.Left;
+                    }
+                    else
+                    {
+                        _sprite.flipX = false;
+                        _rb.velocity = Vector2.up * Speed;
+                        horizontal = Dir.Right;
+                    }
+                }
+            }
+        }
     }
 
     void OnCollisionEnter2D(Collision2D collision)
@@ -57,46 +134,25 @@ public class MonsterController : MonoBehaviour
         {
             _animator.SetTrigger("Attack");
         }
-        IsGroundedUpate(collision, true);
-        Landing();
+        IsGroundedUpate(collision, true);  
     }
 
-    void OnCollisionExit2D(Collision2D collision)
+    void OnCollisionExit2D(Collision2D collision) 
     {
-        IsGroundedUpate(collision, false);
+        IsGroundedUpate(collision, false); 
     }
 
-    private void IsGroundedUpate(Collision2D collision, bool value)
-    {
-        _isGrounded = value;
-    }
+    private void IsGroundedUpate(Collision2D collision, bool value) { isGrounded = value; }
+
 
     void Landing()
     {
-        if (Physics2D.gravity == new Vector2(0, 10))
-        {
-            transform.rotation = Quaternion.Euler(0, 0, 180);
-        }            
-        else if (Physics2D.gravity == new Vector2(0, -10))
-        {
-            transform.rotation = Quaternion.Euler(0, 0, 0);
-        }            
-        else if (Physics2D.gravity == new Vector2(10, 0))
-        {
-            transform.rotation = Quaternion.Euler(0, 0, 90);
-        }
-        else if (Physics2D.gravity == new Vector2(-10, 0))
-        {
-            transform.rotation = Quaternion.Euler(0, 0, 270);
-        }
+        transform.rotation = Quaternion.Euler(0, 0, Direction.angle);
     }
 
     void Animator()
     {
-        if (horizontalInput == 0)
-            _animator.SetBool("Run", false);
-        else
-            _animator.SetBool("Run", true);
+        _animator.SetBool("Run", (horizontal == 0 ? false : true ));
     }
 
     void Death()

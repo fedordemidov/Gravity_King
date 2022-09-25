@@ -10,6 +10,7 @@ public class GravityController : MonoBehaviour
     void Start()
     {
         Physics2D.gravity = StartGravity;
+        Direction.Change(StartGravity);
         SwipeDetection.SwipeEvent += OnSwipe;
     }
 
