@@ -22517,6 +22517,18 @@ PrefabInstance:
       propertyPath: m_IgnoreReversedGraphics
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2550064968340123211, guid: 8d2eb3aa1af1b1a4fb7f19241e408a5b, type: 3}
+      propertyPath: second
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2550064968340123211, guid: 8d2eb3aa1af1b1a4fb7f19241e408a5b, type: 3}
+      propertyPath: direction
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2550064968340123211, guid: 8d2eb3aa1af1b1a4fb7f19241e408a5b, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2844936973621738008, guid: 8d2eb3aa1af1b1a4fb7f19241e408a5b, type: 3}
       propertyPath: Magnitude
       value: 5

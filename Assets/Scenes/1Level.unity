@@ -317,6 +317,14 @@ PrefabInstance:
       propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2550064968340123211, guid: 8d2eb3aa1af1b1a4fb7f19241e408a5b, type: 3}
+      propertyPath: second
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2550064968340123211, guid: 8d2eb3aa1af1b1a4fb7f19241e408a5b, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2844936973621738008, guid: 8d2eb3aa1af1b1a4fb7f19241e408a5b, type: 3}
       propertyPath: Magnitude
       value: 5

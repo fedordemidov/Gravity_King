@@ -14,22 +14,44 @@ public class Training : MonoBehaviour
     }
     [SerializeField] Direction direction;
     [SerializeField] float second;
-    Image sprite;
     Animator animator;
+    IEnumerator coroutine;
 
-    void Start()
+    void OnEnable()
     {
         animator = GetComponent<Animator>();
-        sprite.enabled = false;
-        animator.enabled = false;
+        coroutine = Timer();
+        StartCoroutine(coroutine);
+        SwipeDetection.SwipeEvent += OnSwipe;
     }
 
-    void FixedUpdate()
+    void OnDisable()
     {
-        second--;
-        if (second < 0)
-        {
+        SwipeDetection.SwipeEvent -= OnSwipe;
+    }
 
+    private void OnSwipe(Vector2 direction)
+    {
+        gameObject.SetActive(false);
+    }
+
+    IEnumerator Timer()
+    {
+        yield return new WaitForSeconds(second);
+        switch (direction)
+        {
+            case Direction.Up:
+                animator.SetTrigger("Up");
+                break;
+            case Direction.Left:
+                animator.SetTrigger("Left");
+                break;
+            case Direction.Doun:
+                animator.SetTrigger("Doun");
+                break;
+            case Direction.Right:
+                animator.SetTrigger("Right");
+                break;
         }
     }
 }
