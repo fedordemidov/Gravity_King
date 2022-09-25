@@ -5,17 +5,14 @@ using UnityEngine.UI;
 
 public class SwipeEffects : MonoBehaviour
 {
-    Vector3 dir;
     Image sprite;
     Animator animator;
-    RectTransform rectTransform;
 
     void OnEnable()
     {
         SwipeDetection.SwipeEvent += OnSwipe;
         sprite = GetComponent<Image>();
         animator = GetComponent<Animator>();
-        rectTransform = GetComponent<RectTransform>();
         ArrowOff();
     }
 
@@ -24,13 +21,11 @@ public class SwipeEffects : MonoBehaviour
         SwipeDetection.SwipeEvent -= OnSwipe;
     }
 
-    private void OnSwipe(Vector2 direction)
+    private void OnSwipe(Vector2 dir)
     {
-        dir = direction == Vector2.up ? Vector3.forward : direction == Vector2.down ? Vector3.back : (Vector3)direction;
-        dir.y = dir.z;
         if (this != null)
         {
-            Landing();
+            Landing(dir);
             ArrowOn();
         }        
     }
@@ -47,28 +42,9 @@ public class SwipeEffects : MonoBehaviour
         animator.enabled = false;
     }
 
-    void Landing()
+    private void Landing(Vector2 dir)
     {
-        Debug.Log(dir);
-        if (dir == new Vector3(0, 1, 1))
-        {
-            transform.rotation = Quaternion.Euler(0, 0, 180);
-            Debug.Log(dir);
-        }            
-        else if (dir == new Vector3(0, -1, -1))
-        {
-            transform.rotation = Quaternion.Euler(0, 0, 0);
-            Debug.Log(dir);
-        }            
-        else if (dir == new Vector3(1, 0, 0))
-        {
-            transform.rotation = Quaternion.Euler(0, 0, 90);
-            Debug.Log(dir);
-        }
-        else if (dir == new Vector3(-1, 0, 0))
-        {
-            transform.rotation = Quaternion.Euler(0, 0, 270);
-            Debug.Log(dir);
-        }
+        float angleZ = (dir == Vector2.up) ? 180f : (dir == Vector2.down) ? 0f : (dir == Vector2.left) ? 270f : 90f;
+        transform.rotation = Quaternion.Euler(0, 0, angleZ);
     }
 }
