@@ -8,7 +8,7 @@ public class SelectLevel : MonoBehaviour
     private float iconPosition;
     private AudioSource _audio;
 
-    void Start()
+    void OnEnable()
     {
         _audio = GetComponent<AudioSource>();
         ActiveLevel = -Levels.Length + 1;
@@ -17,25 +17,22 @@ public class SelectLevel : MonoBehaviour
         SwipeDetection.SwipeEvent += OnSwipe;
     }
 
-    void Update()
+    void OnDisable()
     {
-        
+        SwipeDetection.SwipeEvent -= OnSwipe;
     }
 
     private void OnSwipe(Vector2 direction)
     {
-        //Sound();
         if (direction.x < 0 && ActiveLevel > -Levels.Length + 1)
         {
             ActiveLevel -= 1;
+            Sound();
         }
         else if (direction.x > 0 && ActiveLevel <= -1)
         {
             ActiveLevel += 1;
-        }
-        else
-        {
-            
+            Sound();
         }
 
         for (int i=0; i < Levels.Length; i++)

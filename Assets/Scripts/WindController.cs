@@ -8,15 +8,15 @@ public class WindController : MonoBehaviour
     public MeshRenderer MeshRenderer;
     Vector3 dir;
 
-    void Start()
+    void OnEnable()
     {
         MeshRenderer = GetComponent<MeshRenderer>();
         SwipeDetection.SwipeEvent += OnSwipe;
     }
 
-    void Update()
+    void OnDisable()
     {
-        
+        SwipeDetection.SwipeEvent -= OnSwipe;
     }
 
     private void OnSwipe(Vector2 direction)

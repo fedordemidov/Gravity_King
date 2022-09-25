@@ -4,54 +4,51 @@ using UnityEngine;
 
 public class MonsterController : MonoBehaviour
 {
-    public float Speed;
+    [SerializeField] float Speed;
     public float horizontalInput;
-    public LayerMask Wals;
-    public bool _isGrounded;
+    public Transform Tagret;
+    [SerializeField] LayerMask Wals;
+    bool _isGrounded;
     Rigidbody2D _rb;
     Animator _animator;
     Vector2 movement;
     BoxCollider2D box;
+    SpriteRenderer _sprite;
+    Vector2 _direction;
 
     void Start()
     {
         _rb = GetComponent<Rigidbody2D>();
         _animator = GetComponent<Animator>();
         box = GetComponent<BoxCollider2D>();
+        _sprite = GetComponent<SpriteRenderer>();
         SwipeDetection.SwipeEvent += OnSwipe;
     }
 
     void FixedUpdate()
     {
         Animator();
-
-        RaycastHit2D raycastRight = Physics2D.BoxCast(box.bounds.center, box.bounds.size, 0, new Vector2(1, 0), 0.1f, Wals);
-        RaycastHit2D raycastLeft = Physics2D.BoxCast(box.bounds.center, box.bounds.size, 0, new Vector2(-1, 0), 0.1f, Wals);
-
-        if (raycastRight.collider != null && raycastRight.distance <= 0.2f)
-        {
-            horizontalInput = -1;
-        }
-        if (raycastLeft.collider != null && raycastLeft.distance <= 0.2f)
-        {
-            horizontalInput = 1;
-        }
+        
+        Quaternion rotation = Quaternion.LookRotation(_direction);
+        //transform.rotation = Quaternion.Lerp(transform.rotation, rotation, 5 * Time.deltaTime);
 
         if (_isGrounded)
         {
-            movement = new Vector2(horizontalInput, _rb.velocity.y);
-            _rb.velocity = (movement * Speed);
+            movement = new Vector2(Tagret.position.x - transform.position.x, Tagret.position.y- transform.position.y);
+            _rb.velocity = (movement * horizontalInput * Speed);
         }
 
         if (horizontalInput > 0.01f)
-            transform.localScale = new Vector3(1, 1, 1);
+            _sprite.flipX = false;
+            //transform.localScale = new Vector3(1, 1, 1);
         else if (horizontalInput < -0.01f)
-            transform.localScale = new Vector3(-1, 1, 1);
+            _sprite.flipX = true;
+            //transform.localScale = new Vector3(-1, 1, 1);
     }
 
     private void OnSwipe(Vector2 direction)
     {
-        
+        _direction = direction;
     }
 
     void OnCollisionEnter2D(Collision2D collision)
@@ -71,10 +68,7 @@ public class MonsterController : MonoBehaviour
 
     private void IsGroundedUpate(Collision2D collision, bool value)
     {
-        //if (collision.gameObject.layer == Wals)
-        {
-            _isGrounded = value;
-        }
+        _isGrounded = value;
     }
 
     void Landing()
