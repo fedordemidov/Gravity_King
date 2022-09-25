@@ -5,7 +5,6 @@ using UnityEngine.UI;
 
 public class GravityController : MonoBehaviour
 {
-    Vector3 dir;
     public Vector2 StartGravity;
 
     void Start()
@@ -14,10 +13,9 @@ public class GravityController : MonoBehaviour
         SwipeDetection.SwipeEvent += OnSwipe;
     }
 
-    private void OnSwipe(Vector2 direction)
+    private void OnSwipe(Vector2 dir)
     {
-        dir = direction == Vector2.up ? Vector3.forward : direction == Vector2.down ? Vector3.back : (Vector3)direction;
-        dir.y = dir.z;
-        Physics2D.gravity = dir * 10;
+        Direction.Change(dir);
+        Physics2D.gravity = Direction.vector2 * 10;
     }
 }

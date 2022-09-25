@@ -10,7 +10,7 @@ public class SwipeEffects : MonoBehaviour
 
     void OnEnable()
     {
-        SwipeDetection.SwipeEvent += OnSwipe;
+        Direction.OnChange += OnChange;
         sprite = GetComponent<Image>();
         animator = GetComponent<Animator>();
         ArrowOff();
@@ -18,14 +18,14 @@ public class SwipeEffects : MonoBehaviour
 
     void OnDisable()
     {
-        SwipeDetection.SwipeEvent -= OnSwipe;
+        Direction.OnChange -= OnChange;
     }
 
-    private void OnSwipe(Vector2 dir)
+    private void OnChange()
     {
         if (this != null)
         {
-            Landing(dir);
+            Landing();
             ArrowOn();
         }        
     }
@@ -42,9 +42,8 @@ public class SwipeEffects : MonoBehaviour
         animator.enabled = false;
     }
 
-    private void Landing(Vector2 dir)
+    private void Landing()
     {
-        float angleZ = (dir == Vector2.up) ? 180f : (dir == Vector2.down) ? 0f : (dir == Vector2.left) ? 270f : 90f;
-        transform.rotation = Quaternion.Euler(0, 0, angleZ);
+        transform.rotation = Quaternion.Euler(0, 0, Direction.angle);
     }
 }
