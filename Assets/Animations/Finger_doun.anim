@@ -6,7 +6,7 @@ AnimationClip:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Finger
+  m_Name: Finger_doun
   serializedVersion: 6
   m_Legacy: 0
   m_Compressed: 0
@@ -22,7 +22,7 @@ AnimationClip:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: -64
+        value: 32
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -32,24 +32,24 @@ AnimationClip:
       - serializedVersion: 3
         time: 0.5
         value: 0
-        inSlope: 96
-        outSlope: 96
+        inSlope: -64
+        outSlope: -64
         tangentMode: 136
         weightedMode: 0
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
         time: 1
-        value: 32
-        inSlope: 21.333334
-        outSlope: 21.333334
+        value: -32
+        inSlope: -21.333334
+        outSlope: -21.333334
         tangentMode: 136
         weightedMode: 0
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
         time: 2
-        value: 40
+        value: -40
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -149,7 +149,7 @@ AnimationClip:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: -64
+        value: 32
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -159,24 +159,24 @@ AnimationClip:
       - serializedVersion: 3
         time: 0.5
         value: 0
-        inSlope: 96
-        outSlope: 96
+        inSlope: -64
+        outSlope: -64
         tangentMode: 136
         weightedMode: 0
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
         time: 1
-        value: 32
-        inSlope: 21.333334
-        outSlope: 21.333334
+        value: -32
+        inSlope: -21.333334
+        outSlope: -21.333334
         tangentMode: 136
         weightedMode: 0
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
         time: 2
-        value: 40
+        value: -40
         inSlope: 0
         outSlope: 0
         tangentMode: 136
