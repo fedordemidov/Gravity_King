@@ -5,31 +5,20 @@ using UnityEngine.SceneManagement;
 
 public class Finish : MonoBehaviour
 {
-    Animator animator;
-    private IEnumerator coroutine;
+    Animator animator => GetComponent<Animator>();
 
-    void Start()
+    private void OnTriggerEnter2D(Collider2D collider)
     {
-        animator = GetComponent<Animator>();
-        coroutine = Timer();
+        if (collider.gameObject.tag == "Player") Win();
     }
 
-    void OnTriggerEnter2D(Collider2D collider)
+    private void Win()
     {
-        if (collider.gameObject.tag == "Player")
-        {
-            Win();
-        }
-    }
-
-    void Win()
-    {
-        Debug.Log("open");
         animator.SetBool("Open", true);
-        StartCoroutine(coroutine);
+        StartCoroutine(Timer());
     }
 
-    IEnumerator Timer()
+    private IEnumerator Timer()
     {
         yield return new WaitForSeconds(1);
         SceneManager.LoadScene(SceneManager.GetActiveScene ().buildIndex + 1);

@@ -6,7 +6,7 @@ public class ArtificialGravity : MonoBehaviour
 {
     Rigidbody2D rb;
 
-    void Start()
+    protected void Start()
     {
         rb = GetComponent<Rigidbody2D>();
     }
