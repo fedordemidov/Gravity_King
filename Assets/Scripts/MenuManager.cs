@@ -3,6 +3,16 @@ using UnityEngine.SceneManagement;
 
 public class MenuManager : MonoBehaviour
 {
+    private SoundManager sm;
+
+    void Start()
+    {
+        if (GameObject.FindWithTag("SoundManager"))
+        {
+            sm = GameObject.FindWithTag("SoundManager").GetComponent<SoundManager>();
+        }
+    }
+
     public void PauseGame ()
     {
         Time.timeScale = 0;
@@ -20,6 +30,7 @@ public class MenuManager : MonoBehaviour
 
     public void Exit()
     {
+        sm.Menu();
         ResumeGame();
         SceneManager.LoadScene(0);
     }

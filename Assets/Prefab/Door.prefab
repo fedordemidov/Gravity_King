@@ -13,6 +13,8 @@ GameObject:
   - component: {fileID: 538879096051206262}
   - component: {fileID: 7267615186578185693}
   - component: {fileID: 1456122043}
+  - component: {fileID: 7316359495659410924}
+  - component: {fileID: 3682723047706832170}
   m_Layer: 3
   m_Name: Door
   m_TagString: Finish
@@ -123,6 +125,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0dc5c0c6bc4fb944bab65433218ef10f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ad: {fileID: 7316359495659410924}
 --- !u!95 &1456122043
 Animator:
   serializedVersion: 3
@@ -142,3 +145,33 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &7316359495659410924
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8008131077946818127}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c9e9b794c54e77847935020830c8a6a2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _androidAdUnitId: Interstitial_Android
+  _iOsAdUnitId: Interstitial_iOS
+--- !u!114 &3682723047706832170
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8008131077946818127}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c3c9e21f216199458c4eb1dd80f2448, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  androidGameID: 5001279
+  iOSGameID: 5001278
+  testMode: 1
+  interstitialAdsButton: {fileID: 7316359495659410924}
