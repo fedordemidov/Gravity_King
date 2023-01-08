@@ -154,7 +154,7 @@ MonoBehaviour:
   m_PixelsPerUnitMultiplier: 1
 --- !u!95 &889389712652563796
 Animator:
-  serializedVersion: 3
+  serializedVersion: 5
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -167,10 +167,11 @@ Animator:
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
+  m_KeepAnimatorStateOnDisable: 0
 --- !u!114 &1329081549305239098
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6202,7 +6203,7 @@ MonoBehaviour:
   m_PixelsPerUnitMultiplier: 1
 --- !u!95 &3184503030365831900
 Animator:
-  serializedVersion: 3
+  serializedVersion: 5
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -6215,10 +6216,11 @@ Animator:
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
+  m_KeepAnimatorStateOnDisable: 0
 --- !u!114 &2550064968340123211
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7187,7 +7189,7 @@ SpriteRenderer:
   m_SpriteSortPoint: 0
 --- !u!95 &6014312306984328231
 Animator:
-  serializedVersion: 3
+  serializedVersion: 5
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -7200,10 +7202,11 @@ Animator:
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
+  m_KeepAnimatorStateOnDisable: 0
 --- !u!1 &6014312308199317487
 GameObject:
   m_ObjectHideFlags: 0
@@ -7215,6 +7218,7 @@ GameObject:
   - component: {fileID: 6014312308199317485}
   - component: {fileID: 6014312308199317484}
   - component: {fileID: 6014312308199317482}
+  - component: {fileID: 4301092945991315972}
   - component: {fileID: 2844936973621738008}
   - component: {fileID: 5246193359076978550}
   - component: {fileID: 4248074119415595044}
@@ -7283,10 +7287,24 @@ MonoBehaviour:
   ground:
     serializedVersion: 2
     m_Bits: 1
+  _pac: {fileID: 4301092945991315972}
   Grounded: 1
   ButtonInput: 0
   boost: 10
   ButtonSpeed: 0
+--- !u!114 &4301092945991315972
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6014312308199317487}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea74acc37bdd72146a640fb020546d35, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioSource: {fileID: 6898923056401894383}
 --- !u!114 &2844936973621738008
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7374,9 +7392,9 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 29bde6326b4c34ad8a12da475f79b50a, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 20ec9a0d2bfe2544a90de563918c72e9, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0.5
+  m_Volume: 0.1
   m_Pitch: 1
   Loop: 0
   Mute: 0

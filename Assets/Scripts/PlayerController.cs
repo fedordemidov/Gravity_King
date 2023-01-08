@@ -7,6 +7,7 @@ public class PlayerController : MonoBehaviour
     public float Speed, JumpForce;
     public GameObject body;
     public LayerMask ground;
+    [SerializeField] PlayerAudioController _pac;
     public bool Grounded;
     public float ButtonInput;
     public float boost;
@@ -67,7 +68,7 @@ public class PlayerController : MonoBehaviour
     {
         RaycastHit2D raycastHit = Physics2D.BoxCast(boxCollider.bounds.center, boxCollider.bounds.size, 0, Vector2.down, 0.1f, ground);
         Grounded = raycastHit.collider != null;
-        return raycastHit.collider != null;
+        return Grounded;
     }
 
     public void HorizontalMove(int speed)
@@ -79,5 +80,14 @@ public class PlayerController : MonoBehaviour
     void ButtonInputMove()
     {
         ButtonInput = Mathf.Lerp(ButtonInput, ButtonSpeed, Time.deltaTime*boost);
+    }
+
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        //RaycastHit2D raycastHit;
+        //if (raycastHit = Physics2D.BoxCast(boxCollider.bounds.center, boxCollider.bounds.size, 0, Vector2.down, 0.1f, ground))
+        {
+            _pac.landingPlay();
+        }
     }
 }
